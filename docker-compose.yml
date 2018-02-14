@@ -1,0 +1,28 @@
+version: '3'
+services:
+  produce-state-categories:
+    volumes:
+     - ./produce-state-categories:/produce-state-categories
+    build: ./produce-state-categories
+    ports:
+     - "5000:5000"
+    tty: true
+  queue:
+    build: ./queue
+    ports:
+     - "15672:15672"
+    tty: true
+  scrape:
+    volumes:
+     - ./scrape:/scrape
+    build: ./scrape
+    tty: true
+  elasticsearch:
+    image: elasticsearch:5.6.7
+    volumes:
+     - ./elasticsearch/esdata:/usr/share/elasticsearch/data
+  kibana:
+    image: kibana:5.6.7
+    ports:
+     - "5601:5601"
+
