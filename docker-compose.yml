@@ -1,11 +1,19 @@
 version: '3'
 services:
-  produce-state-categories:
+  state-producer:
     volumes:
-     - ./produce-state-categories:/produce-state-categories
-    build: ./produce-state-categories
-    ports:
-     - "5000:5000"
+     - ./state-producer:/app
+    build: state-producer
+    tty: true
+  city-categories:
+    volumes:
+      - ./city_category:/app
+    build: city_category
+    tty: true
+  store:
+    volumes:
+      - ./store:/app
+    build: store
     tty: true
   queue:
     build: ./queue
